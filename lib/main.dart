@@ -49,6 +49,55 @@ class _RegistroEstudiantesState extends State<RegistroEstudiantes> {
 
   @override
   Widget build(BuildContext context) {
-    
+    return Scaffold(
+      appBar: AppBar(title: const Text("Registro de Estudiantes")),
+
+      body: Padding(
+        padding: const EdgeInsets.all(10),
+
+        child: Column(
+          children: [
+            TextField(
+              controller: txtNombre,
+              decoration: const InputDecoration(labelText: "Nombre"),
+            ),
+
+            TextField(
+              controller: txtCuenta,
+              decoration: const InputDecoration(labelText: "Cuenta"),
+            ),
+
+            TextField(
+              controller: txtCarrera,
+              decoration: const InputDecoration(labelText: "Carrera"),
+            ),
+
+            const SizedBox(height: 20),
+
+            Expanded(
+              child: SingleChildScrollView(
+                child: DataTable(
+                  columns: [
+                    DataColumn(label: Text("Nombre")),
+                    DataColumn(label: Text("Cuenta")),
+                    DataColumn(label: Text("Carrera")),
+                  ],
+
+                  rows: estudiantes.map((estudiante) {
+                    return DataRow(
+                      cells: [
+                        DataCell(Text(estudiante["nombre"]!)),
+                        DataCell(Text(estudiante["cuenta"]!)),
+                        DataCell(Text(estudiante["carrera"]!)),
+                      ],
+                    );
+                  }).toList(),
+                ),
+              ),
+            ),
+          ],
+        ), 
+      ),
+    );
   }
 }
